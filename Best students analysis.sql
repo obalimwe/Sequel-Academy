@@ -10,7 +10,7 @@ JOIN
 JOIN 
     subjects ON js_broadsheet.subject_id = subjects.subject_id
 WHERE 
-    students.class_id = 'JS1'  -- Replace with the desired class ID
+    students.class_id = 'JS1'  
 GROUP BY 
     students.student_id, 
     students.name, 
