@@ -1,55 +1,60 @@
 Table staff {
-  staff_id int [pk, increment] // primary key and auto-increments
+  staff_id int [pk]
   name varchar(255)
   role varchar(100)
+  gender varchar(10)
 }
 
 Table class {
-  class_id varchar(5) [pk] // primary key
-  form_teacher_id int [ref: > staff.staff_id] // foreign key reference to staff table
+  class_id varchar(5) [pk]
+  form_teacher_id int [ref: > staff.staff_id]
 }
 
-Table hod {
-  department_id int [pk, increment] // primary key and auto-increments
-  name varchar(100)
-  hod_id int [ref: > staff.staff_id] // foreign key reference to staff table
+Table students {
+  student_id int [pk]
+  name varchar(255)
+  class_id varchar(5) [ref: > class.class_id]
+  gender varchar(10)
+}
+
+Table class_assignments {
+  assignment_id int [pk]
+  teacher_id int [ref: > staff.staff_id]
+  class varchar(255)
+  subject_id int
 }
 
 Table subjects {
-  subject_id int [pk, increment] // primary key and auto-increments
+  subject_id int [pk]
   name varchar(100)
   department_id varchar(100)
 }
 
-Table class_assignments {
-  assignment_id int [pk, increment] // primary key and auto-increments
-  teacher_id int [ref: > staff.staff_id] // foreign key reference to staff table
-  class varchar(255)
-  subject_id int [ref: > subjects.subject_id] // foreign key reference to subjects table
-}
-
-Table students {
-  student_id int [pk, increment] // primary key and auto-increments
-  name varchar(255)
-  class_id varchar(5) [ref: > class.class_id] // foreign key reference to class table
+Table hod {
+  department_id int [pk]
+  name varchar(100)
+  hod_id int [ref: > staff.staff_id]
 }
 
 Table js_broadsheet {
-  student_id int [ref: > students.student_id] // foreign key reference
-  subject_id int [ref: > subjects.subject_id] // foreign key reference
-  class_id varchar(5) [ref: > class.class_id] // foreign key reference
-  CA1 decimal(4,2) // assumed check constraint within application logic
-  CA2 decimal(4,2) // assumed check constraint within application logic
-  Exam decimal(4,2) // assumed check constraint within application logic
+  student_id int [ref: > students.student_id]
+  subject_id int [ref: > subjects.subject_id]
+  class_id varchar(5) [ref: > class.class_id]
+  CA1 decimal(4,2)
+  CA2 decimal(4,2)
+  Exam decimal(4,2)
   Term varchar(50)
 }
 
 Table ss_broadsheet {
-  student_id int [ref: > students.student_id] // foreign key reference
-  subject_id int [ref: > subjects.subject_id] // foreign key reference
-  class_id varchar(5) [ref: > class.class_id] // foreign key reference
-  CA1 decimal(4,2) // assumed check constraint within application logic
-  CA2 decimal(4,2) // assumed check constraint within application logic
-  Exam decimal(4,2) // assumed check constraint within application logic
+  student_id int [ref: > students.student_id]
+  subject_id int [ref: > subjects.subject_id]
+  class_id varchar(5) [ref: > class.class_id]
+  CA1 decimal(4,2)
+  CA2 decimal(4,2)
+  Exam decimal(4,2)
   Term varchar(50)
 }
+
+
+
